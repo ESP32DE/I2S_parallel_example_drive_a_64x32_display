@@ -402,7 +402,7 @@ void frame_update() {
                     int v=lbits;
                     //Do not show image while the line bits are changing
                     if (fx<1 || fx>=brightness) v|=BIT_OE;
-                    if (fx==63) v|=BIT_LAT; // was 62 latch on second-to-last bit... why not last bit? Dunno, probably a timing thing.
+                    if (fx==62) v|=BIT_LAT; // mistake? back to origin .....why not last bit? Dunno, probably a timing thing.
 
                     int c1, c2;
                     c1=getpixel(fb, x, y);
