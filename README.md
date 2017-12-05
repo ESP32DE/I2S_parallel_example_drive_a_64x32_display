@@ -25,9 +25,7 @@ It doesn't look too bad at all, even through this dodgy GIF conversion from ipho
 
 - Dropped packets hurt it of course- this is on my home wifi network, so can't imagine why there would be too many dropped UDP packets, but there are. Certainly the esp32 handles it better with fewer packets in a row, but I would be delighted to find that I've done UDP reception wrong and is easily fixed
 - Even without the dropped frames, the regulation in making frames regular isn't great, so sometimes it's fine, sometimes it's not, again, I've done no work on making this better
-- ~~The frame display mechanism has a few issues - the left most (zero) pixel seems to be wrapped from the right hand side of the display (should be easy to fix) and there are some ghosting issues especially with green (not sure where this is coming from)~~
-
-see ![patch](https://github.com/ESP32DE/I2S_parallel_example_drive_a_64x32_display/commit/663a658408fda9cf7ed9c2552cb98a01d5af1877)
+- ~~The frame display mechanism has a few issues - the left most (zero) pixel seems to be wrapped from the right hand side of the display (should be easy to fix) and there are some ghosting issues especially with green (not sure where this is coming from)~~ see ![patch](https://github.com/ESP32DE/I2S_parallel_example_drive_a_64x32_display/commit/663a658408fda9cf7ed9c2552cb98a01d5af1877)
 
 Certainly needs some work but shows the capabilities of the chip and a cheap display.
 
