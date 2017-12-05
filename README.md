@@ -7,7 +7,6 @@ https://esp32.com/viewtopic.php?f=17&t=3188&start=10#p15146
 # Taken from the origin Post (wobblyboots):
 
 Taking Sprite_tm's work and adding extra colour(s).
-// to do : insert pictures
 
 ![demopic](image1.jpg)
 
@@ -17,8 +16,6 @@ It can talk a few protocols, of which I've picked TPM.net since this is over IP 
 
 I took Sprite_tm's app and hacked in receiving tpm.net frame reception, resulting in this:
 
-// to do:
-insert animation
 
 ![demoanimation](jinxdemo.gif)
 
@@ -48,14 +45,12 @@ Finally, from the Setup menu, turn on Start Output.
 Jinx should start sending packets to your ESP32 and you'll get pretty pictures. You can even set it up to take live video from your webcam or the actual screen output and shove it on the display.
 
 
+Jinx! you found here:
+
+http://www.live-leds.de/
 
 
-// to do: 
-insert link to JINX!
-
-
-
-# Be aware that this is preliminary work and it comes with no guarantees or support from Espressif.
+Be aware that this is preliminary work and it comes with no guarantees or support from Espressif.
 
   
  
