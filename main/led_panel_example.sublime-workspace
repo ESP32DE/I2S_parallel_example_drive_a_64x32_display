@@ -1,0 +1,758 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"gpio_matrix_OUT",
+				"gpio_matrix_OUT"
+			],
+			[
+				"ind",
+				"indicator_led_pin"
+			],
+			[
+				"indc",
+				"indicator_led_pin"
+			],
+			[
+				"indica",
+				"indicator_led_pin"
+			],
+			[
+				"ti",
+				"title_screen"
+			],
+			[
+				"get",
+				"get_poker_hand_value_rank"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "anim.c",
+			"settings":
+			{
+				"buffer_size": 492639,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "anim.h",
+			"settings":
+			{
+				"buffer_size": 34,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app_main.c",
+			"settings":
+			{
+				"buffer_size": 13468,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "network.c",
+			"settings":
+			{
+				"buffer_size": 7747,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "/* udp_perf Example"
+			}
+		},
+		{
+			"file": "network.h",
+			"settings":
+			{
+				"buffer_size": 2476,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "/* udp_perf Example"
+			}
+		},
+		{
+			"file": "i2s_parallel.c",
+			"settings":
+			{
+				"buffer_size": 7238,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "i2s_parallel.h",
+			"settings":
+			{
+				"buffer_size": 665,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "val2pwm.c",
+			"settings":
+			{
+				"buffer_size": 3484,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "val2pwm.h",
+			"settings":
+			{
+				"buffer_size": 102,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/ESP32/projects/esp-idf-template/components/draw/draw_font_5narrow.c",
+		"/C/ESP32/projects/esp-idf-template/components/draw/include/draw_fonts.h",
+		"/C/ESP32/projects/esp-idf-template/components/utils/include/pic_utils.h",
+		"/C/ESP32/projects/esp-idf-template/components/utils/pic_utils.c",
+		"/C/ESP32/projects/esp-idf-template/components/draw/draw_fonts.c",
+		"/C/ESP32/projects/esp-idf-template/components/draw/draw_border.c",
+		"/C/ESP32/projects/esp-idf-template/components/draw/include/draw.h",
+		"/C/ESP32/esp-idf/components/freertos/list.c",
+		"/C/ESP32/esp-idf/components/freertos/include/freertos/list.h",
+		"/C/ESP32/projects/test_lcd/test_lcd.c",
+		"/C/ESP32/projects/esp-idf-template/components/draw/i2c_magic.c",
+		"/C/ESP32/projects/esp-idf-template/components/ea_config/include/ea_config.h",
+		"/C/ESP32/projects/esp-idf-template/components/utils/component.mk",
+		"/C/ESP32/projects/esp-idf-template/components/draw/component.mk",
+		"/C/ESP32/projects/esp-idf-template/components/draw/draw_scroll.c",
+		"/C/ESP32/projects/esp-idf-template/components/draw/fireworks.c",
+		"/C/ESP32/esp-idf/components/freertos/queue.c",
+		"/C/ESP32/esp-idf/components/freertos/event_groups.c",
+		"/C/ESP32/esp-idf/components/esp32/include/esp_system.h",
+		"/C/ESP32/esp-idf/examples/peripherals/spi_slave/sender/main/app_main.c",
+		"/C/ESP32/projects/esp-idf-template/main/main.c",
+		"/C/ESP32/esp-idf/components/freertos/tasks.c",
+		"/C/ESP32/libusb/README.txt",
+		"/C/Users/iharris/AppData/Local/Temp/7zE4BA67B1E/README.txt",
+		"/C/ESP32/esp-idf/components/app_trace/sys_view/SEGGER/SEGGER_SYSVIEW.c",
+		"/C/ESP32/esp-idf/components/app_trace/sys_view/Sample/Config/SEGGER_SYSVIEW_Config_FreeRTOS.c",
+		"/C/ESP32/projects/blink/build/include/config/sysview/ts/source/timer/00.h",
+		"/C/ESP32/projects/esp-idf-template/components/draw/draw.c",
+		"/C/ESP32/projects/esp-idf-template/components/draw/led_panel.c",
+		"/C/ESP32/projects/esp-idf-template/components/draw/include/led_panel.h",
+		"/C/ESP32/projects/blink/gdbinit",
+		"/C/ESP32/esp-idf/docs/api-guides/SYSVIEW_FreeRTOS.txt",
+		"/C/ESP32/projects/blink/pro-cpu.SVDat",
+		"/C/ESP32/openocd-esp32/share/openocd/scripts/interface/ftdi/esp32_devkitj_v1.cfg",
+		"/C/ESP32/openocd-esp32/share/openocd/scripts/board/esp-wroom-32.cfg",
+		"/C/ESP32/projects/blink/build/include/config/sysview/enable.h",
+		"/Z/Dropbox/Programming/pic32/PLT2001 with_Bootloader/source/plt1001v5_firmware.c",
+		"/Z/Dropbox/Programming/pic32/plt1001v5/source/plt1001v5_firmware.c",
+		"/C/ESP32/esp-idf/esp-idf/examples/get-started/hello_world/main/hello_world_main.c",
+		"/C/ESP32/esp-idf/esp-idf/components/esp32/system_api.c",
+		"/C/ESP32/projects/esp-idf-template/Makefile",
+		"/C/ESP32/projects/esp-idf-template/build/freertos/component_project_vars.mk",
+		"/C/ESP32/esp-idf/esp-idf/components/freertos/event_groups.c",
+		"/C/ESP32/projects/esp-idf-template/build/freertos/event_groups.o",
+		"/C/ESP32/projects/esp-idf-template/components/draw/draw_screen_buffer.c",
+		"/C/ESP32/projects/esp-idf-template/main/config.h",
+		"/Z/Dropbox/Programming/pic_pack_32/drv_ea_ldp6432.c",
+		"/Z/Dropbox/Programming/pic_pack_32/draw.h",
+		"/C/ESP32/projects/esp-idf-template/build/main/component_project_vars.mk",
+		"/Z/Dropbox/Programming/pic32/plt1001v5/source/config.h",
+		"/C/ESP32/projects/esp-idf-template/main/component.mk",
+		"/C/ESP32/projects/esp-idf-template/README.rst",
+		"/C/ESP32/projects/esp-idf-template/.project",
+		"/C/ESP32/esp-idf/esp-idf/components/freertos/Kconfig",
+		"/C/ESP32/esp-idf/esp-idf/examples/protocols/coap_client/main/coap_client_example_main.c",
+		"/C/ESP32/esp-idf/esp-idf/examples/peripherals/gpio/main/gpio_example_main.c",
+		"/C/ESP32/esp-idf/esp-idf/docs/api-reference/peripherals/gpio.rst",
+		"/C/ESP32/esp-idf/esp-idf/docs/api-reference/peripherals/i2c.rst",
+		"/C/ESP32/esp-idf/esp-idf/docs/api-reference/peripherals/uart.rst",
+		"/C/ESP32/esp-idf/esp-idf/components/driver/i2c.c",
+		"/C/ESP32/esp-idf/examples/peripherals/i2c/main/i2c_test.c",
+		"/C/ESP32/esp-idf/examples/peripherals/gpio/main/gpio_test.c",
+		"/C/ESP32/esp-idf/examples/peripherals/uart/main/uart_test.c",
+		"/C/ESP32/esp-idf/components/driver/uart.c",
+		"/C/ESP32/esp-idf/docs/api/peripherals/uart.rst",
+		"/C/ESP32/esp-idf/docs/api/peripherals/i2c.rst",
+		"/C/Users/iharris/poker/db_test.pl",
+		"/C/Users/iharris/poker/poker_utils.pl",
+		"/C/Program Files/OpenVPN/sample-config/sample.ovpn",
+		"/C/Users/iharris/Documents/Arduino/libraries/pubsubclient/src/PubSubClient.h",
+		"/C/Program Files (x86)/Arduino/lib/pubsubclient/src/PubSubClient.h",
+		"/C/Users/iharris/Desktop/auth.txt",
+		"/C/Users/iharris/Desktop/wobblyboots.ovpn",
+		"/C/Program Files/OpenVPN/sample-config/client.ovpn",
+		"/C/Program Files (x86)/OpenVPN Technologies/PrivateTunnel/configuration.json",
+		"/C/Users/iharris/poker/poker_run_db.pl",
+		"/C/Users/iharris/poker/poker_db.pl",
+		"/C/Users/iharris/poker/poker.pl",
+		"/Z/Dropbox/Programming/testing/epd_arduino/epd_draw/config.h",
+		"/Z/Dropbox/Programming/Projects_pic32/PLT2001_BL/source/plt2001_firmware.c",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_run.pl",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_run_db.pl",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_test.pl",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_test_db.pl",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_utils.pl",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_utils_db.pl",
+		"/Z/Dropbox/PicPack_OLD/testing/results.txt",
+		"/C/Users/iharris/poker/test_count.js",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_db.pl",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_results",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_start",
+		"/Z/Dropbox/PicPack_OLD/testing/poker_db_pg.pl"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\ESP32",
+			"C:\\ESP32\\projects\\",
+			"C:\\ESP32\\projects\\esp-idf-template",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"any",
+			"event",
+			"EXAMPLE_DEFAULT_PKTSIZE",
+			"brightness",
+			"bitplane",
+			"clkspeed_hz",
+			"div",
+			"20",
+			"clock",
+			"BITPLANE_CNT",
+			"gpio",
+			"button",
+			"show",
+			"lana",
+			"clock",
+			"getpixel",
+			"I2S_TX_SLAVE_MOD",
+			"panel_refresh_new",
+			"rdysem",
+			"semaphore",
+			"panel_refresh",
+			"pinned",
+			"tskNO_AFFINITY",
+			"pinned",
+			"higher",
+			"panel_refresh_trigger",
+			"esp_log",
+			"void _sendPacket",
+			"_sendpacket",
+			"_send_packet",
+			"timer_val",
+			"xHigherPriorityTaskWoken",
+			"refreshing",
+			"uxbits",
+			"isr",
+			"panel_refresh",
+			"isr",
+			"scroll_update_task",
+			"refresh_trigger",
+			"isr",
+			"intr_status",
+			"set_pins",
+			"group",
+			"geroup",
+			"panel_refresh",
+			"timer",
+			"panel_refresh",
+			"timer_start",
+			"panel_refresh(",
+			"refresh_panel(",
+			"panel_refresh",
+			"refresh_panel(",
+			"scroll",
+			"    \n",
+			"\n    ",
+			"timer_group0_isr",
+			"timer_idxftimer_group0_isr",
+			"refresh",
+			"refreh",
+			"sample_timer",
+			"delay",
+			"vdelay",
+			"panel_refresh(",
+			"panel_refresh",
+			"refresh",
+			"panel_canary",
+			"panel_refresh",
+			"xreturned",
+			"setup_timer",
+			"iram",
+			"timer",
+			"scroll",
+			"panel_running",
+			"running",
+			"timer",
+			"register",
+			"PANEL_REFRESH_TRIGGER",
+			"timer_task",
+			"setbits",
+			"running",
+			"xeventgroupsetbit",
+			"running",
+			"refresh_trigger",
+			"timer_group",
+			"configure_system",
+			"timer_task",
+			"esp_chip_info_t",
+			"esp_chip_info",
+			"esp_chip_info_t",
+			"yield(",
+			"yield",
+			"esp_log",
+			"esp_log///",
+			"esp_log",
+			"esp32_log",
+			"esp32",
+			"buffer_flip",
+			"paint_dual",
+			"scroll_update",
+			"scroll_setup",
+			"title",
+			"scroll",
+			"title",
+			"plt-1001",
+			"flip",
+			"panel_refresh",
+			"panel-refresh",
+			"dual_rows(",
+			"paint",
+			"request_buffer_flip",
+			"buffer",
+			"panel_paint_dual_rows(",
+			"draw_double_buffer",
+			"buffer",
+			"task",
+			"buffer",
+			"panel_paint_dual_rows",
+			"draw_paint",
+			"listget",
+			"xTasksWaitingForBits",
+			"paneL_event_group",
+			"null",
+			"timer_task",
+			"listGET_LIST_ITEM_VALUE",
+			"eventgroup_t",
+			"traceevent_group_create",
+			"esp_log",
+			"head"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"ESP32_LOGD(TAG,"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "anim.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 492639,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								492639,
+								492639
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "anim.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app_main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13468,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11265,
+								11265
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3189.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "network.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7747,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6640,
+								6640
+							]
+						],
+						"settings":
+						{
+							"auto_name": "/* udp_perf Example",
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2145.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "network.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2476,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1343,
+								1343
+							]
+						],
+						"settings":
+						{
+							"auto_name": "/* udp_perf Example",
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 507.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "i2s_parallel.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7238,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4525,
+								4525
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1623.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "i2s_parallel.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 665,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "val2pwm.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3484,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								761,
+								671
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "val2pwm.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 102,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 21.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "led_panel_example.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

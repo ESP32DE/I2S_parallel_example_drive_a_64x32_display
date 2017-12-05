@@ -1,23 +1,61 @@
 # I2S_parallel_example_drive_a_64x32_display
 I2S parallel example drive a 64x32 RGB display. 
 
-# Read more about this example 
-https://esp32.com/viewtopic.php?f=17&t=3188#p14940
+# Read more about this Network ( JINX! ) example 
+https://esp32.com/viewtopic.php?f=17&t=3188&start=10#p15146
 
-# Taken from the origin Post (ESP_Sprite):
-So while we're still working on some kind of official driver for the parallel mode of the I2S peripheral, we do already have some logic for it working. Essentially, we can use DMA to set up a round-robin buffer to output a selected set of buffers over and over again. THis is ideal for generating a fixed signal of some sorts, and can be used to control a 'dumb' LED-display. 
+# Taken from the origin Post (wobblyboots):
 
-This is what we did:
+Taking Sprite_tm's work and adding extra colour(s).
+// to do : insert pictures
 
-![testanimation](https://raw.githubusercontent.com/ESP32DE/I2S_parallel_example_drive_a_64x32_display/master/output.gif)
+![demopic](image1.jpg)
 
-The logic involved actually is somewhat more involved than it may look: because the LEDs on the screen can only lit on 2 out of the 16 rows at the time, the display needs to be continuously supplied with data. To complicate things even more, each subpixel can only be turned off or on, so there's no chance of doing grayscale... unless you send a bazillion subframes to get something like PWM working. The end result is that the DMA engine in the ESP32 is put to good use here, continuously pumping about 100MBit of data into the LED-display without using up a single percent of CPU power. 
+Jinx is a ... well it's a little hard to describe. It's a LED performance application that allows you to send fun graphics to LED and other lighting devices. All the processing is done on a PC and then it sends frames to the device.
 
-The result is pretty good:
+It can talk a few protocols, of which I've picked TPM.net since this is over IP and the simplest one.
 
-![testpic](https://raw.githubusercontent.com/ESP32DE/I2S_parallel_example_drive_a_64x32_display/master/20170930_114830_s.jpg)
+I took Sprite_tm's app and hacked in receiving tpm.net frame reception, resulting in this:
 
-Be aware that this is preliminary work and it comes with no guarantees or support from Espressif.
+// to do:
+insert animation
+
+![demoanimation](jinxdemo.gif)
+
+It doesn't look too bad at all, even through this dodgy GIF conversion from iphone video. In real life, the colours are lovely.
+
+# Some issues:
+
+- Dropped packets hurt it of course- this is on my home wifi network, so can't imagine why there would be too many dropped UDP packets, but there are. Certainly the esp32 handles it better with fewer packets in a row, but I would be delighted to find that I've done UDP reception wrong and is easily fixed
+- Even without the dropped frames, the regulation in making frames regular isn't great, so sometimes it's fine, sometimes it's not, again, I've done no work on making this better
+- The frame display mechanism has a few issues - the left most (zero) pixel seems to be wrapped from the right hand side of the display (should be easy to fix) and there are some ghosting issues especially with green (not sure where this is coming from)
+
+Certainly needs some work but shows the capabilities of the chip and a cheap display.
+
+
+
+# For Jinx:
+
+- Choose File | Open, choose the demo.jnx. Do this first, since the display settings are embedded in here.
+- Choose Setup | Matrix Options , enter 64 x 32, and 1 and 1 for pixel step and space
+- In Setup | Output Devices, choose add, and enter tpm-net, the IP address of your esp32, channels = 6144 (which is 64x32x3) and Chan/Block of 1024. This determines how many UDP packets per frame are sent, so if you say "1" then you'll get 6144 UDP packets per frame. Seems to max out at packet size of 1500 (actually it lets you put in any value but then just fails to send packets), which is a shame since I'd hoped the wifi max of 1536 would mean one less packet per frame
+- Now go to Setup | Output Patch, make sure red, green, blue are 0, 1 2, and hit Fast Patch. Enter 64 x 32, Linewise Top Left, RGB and 0, and OK. All the "pixels" in this window should show green.
+- In View menu, turn on Scene list and Chase list.
+- Find the Chase list window and press Play.
+
+Finally, from the Setup menu, turn on Start Output.
+
+Jinx should start sending packets to your ESP32 and you'll get pretty pictures. You can even set it up to take live video from your webcam or the actual screen output and shove it on the display.
+
+
+
+
+// to do: 
+insert link to JINX!
+
+
+
+# Be aware that this is preliminary work and it comes with no guarantees or support from Espressif.
 
   
  

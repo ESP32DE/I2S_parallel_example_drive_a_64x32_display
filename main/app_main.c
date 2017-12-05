@@ -26,7 +26,17 @@
 #include "val2pwm.h"
 #include "i2s_parallel.h"
 
+#include "driver/gpio.h"
 
+
+#include <errno.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/event_groups.h"
+#include "esp_log.h"
+#include "esp_err.h"
+
+#include "network.h"
 
 /*
 This is example code to driver a p3(2121)64*32 -style RGB LED display. These types of displays do not have memory and need to be refreshed
@@ -89,6 +99,7 @@ Note: Because every subframe contains one bit of grayscale information, they are
 //This is the bit depth, per RGB subpixel, of the data that is sent to the display.
 //The effective bit depth (in computer pixel terms) is less because of the PWM correction. With
 //a bitplane count of 7, you should be able to reproduce an 16-bit image more or less faithfully, though.
+// was 7
 #define BITPLANE_CNT 7
 
 //64*32 RGB leds, 2 pixels per 16-bit value...
@@ -107,8 +118,64 @@ Note: Because every subframe contains one bit of grayscale information, they are
 #define BIT_B (1<<9)    //connected to GPIO18 here
 #define BIT_C (1<<10)   //connected to GPIO19 here
 #define BIT_D (1<<11)   //connected to GPIO21 here
+
 #define BIT_LAT (1<<12) //connected to GPIO26 here
 #define BIT_OE (1<<13)  //connected to GPIO25 here
+
+
+//this task establish a UDP connection and receive data from UDP
+static void udp_conn(void *pvParameters)
+{
+    ESP_LOGI(TAG, "task udp_conn start.");
+    /*wating for connecting to AP*/
+    xEventGroupWaitBits(udp_event_group, WIFI_CONNECTED_BIT,false, true, portMAX_DELAY);
+    ESP_LOGI(TAG, "sta has connected to ap.");
+    
+    /*create udp socket*/
+    int socket_ret;
+    
+    ESP_LOGI(TAG, "create udp server after 3s...");
+    vTaskDelay(3000 / portTICK_RATE_MS);
+    ESP_LOGI(TAG, "create_udp_server.");
+    socket_ret=create_udp_server();
+
+    if(socket_ret == ESP_FAIL) {
+        ESP_LOGI(TAG, "create udp socket error,stop.");
+        vTaskDelete(NULL);
+    }
+    
+    /*create a task to tx/rx data*/
+    TaskHandle_t tx_rx_task;
+    xTaskCreate(&send_recv_data, "send_recv_data", 4096, NULL, 4, &tx_rx_task);
+
+    /*waiting udp connected success*/
+    xEventGroupWaitBits(udp_event_group, UDP_CONNCETED_SUCCESS,false, true, portMAX_DELAY);
+    int bps;
+    while (1) {
+    total_data = 0;
+    vTaskDelay(3000 / portTICK_RATE_MS);//every 3s
+    bps = total_data / 3;
+
+    if (total_data <= 0) {
+        int err_ret = check_connected_socket();
+        if (err_ret == -1) {  //-1 reason: low level netif error
+        ESP_LOGW(TAG, "udp send & recv stop.\n");
+        break;
+        }
+    }
+
+#if EXAMPLE_ESP_UDP_PERF_TX
+    ESP_LOGI(TAG, "udp send %d byte per sec! total pack: %d \n", bps, success_pack);
+#else
+    ESP_LOGI(TAG, "udp recv %d byte per sec! total pack: %d \n", bps, success_pack);
+#endif /*EXAMPLE_ESP_UDP_PERF_TX*/
+    }
+    close_socket();
+    vTaskDelete(tx_rx_task);
+    vTaskDelete(NULL);
+}
+
+
 
 
 //Get a pixel from the image at pix, assuming the image is a 64x32 8R8G8B image
@@ -118,9 +185,9 @@ static uint32_t getpixel(unsigned char *pix, int x, int y) {
     return (p[0]<<16)|(p[1]<<8)|(p[2]);
 }
 
-void app_main()
+void app_main_old()
 {
-    int brightness=16; //Change to set the global brightness of the display, range 1-63
+    int brightness=8; //Change to set the global brightness of the display, range 1-63
                        //Warning when set too high: Do not look into LEDs with remaining eye.
     
     i2s_parallel_buffer_desc_t bufdesc[2][1<<BITPLANE_CNT];
@@ -128,7 +195,7 @@ void app_main()
         .gpio_bus={2, 15, 4, 16, 27, 17, -1, -1, 5, 18, 19, 21, 26, 25, -1, -1},
         .gpio_clk=22,
         .bits=I2S_PARALLEL_BITS_16,
-        .clkspeed_hz=20*1000*1000,
+        .clkspeed_hz=80*1000*1000, //80 for 20Mhz
         .bufa=bufdesc[0],
         .bufb=bufdesc[1],
     };
@@ -179,11 +246,17 @@ void app_main()
     
     int apos=0; //which frame in the animation we're on
     int backbuf_id=0; //which buffer is the backbuffer, as in, which one is not active so we can write to it
+
+    wifi_init_sta();
+
+    xTaskCreate(&udp_conn, "udp_conn", 4096, NULL, 5, NULL);
+
+
     while(1) {
         //Fill bitplanes with the data for the current image
         const uint8_t *pix=&anim[apos*64*32*3];     //pixel data for this animation frame
-        for (int pl=0; pl<BITPLANE_CNT; pl++) {
-            int mask=(1<<(8-BITPLANE_CNT+pl)); //bitmask for pixel data in input for this bitplane
+        for (int pl=0; pl<BITPLANE_CNT; pl++) {  // 0 to 6
+            int mask=(1<<(8-BITPLANE_CNT+pl)); //bitmask for pixel data in input for this bitplane 8-7 = 1 + pl
             uint16_t *p=bitplane[backbuf_id][pl]; //bitplane location to write to
             for (unsigned int y=0; y<16; y++) {
                 int lbits=0;                //Precalculate line bits of the *previous* line, which is the one we're displaying now
@@ -223,7 +296,7 @@ void app_main()
         i2s_parallel_flip_to_buffer(&I2S1, backbuf_id);
         backbuf_id^=1;
         //Bitplanes are updated, new image shows now.
-        vTaskDelay(100 / portTICK_PERIOD_MS); //animation has an 100ms interval
+        vTaskDelay(50 / portTICK_PERIOD_MS); //animation has an 100ms interval
 
         if (gpio_get_level(0)) {
             //show next frame of Nyancat animation
@@ -237,4 +310,143 @@ void app_main()
 }
 
 
+void frame_update() {
+
+    int brightness=32; //Change to set the global brightness of the display, range 1-63
+
+    i2s_parallel_buffer_desc_t bufdesc[2][1<<BITPLANE_CNT];
+    i2s_parallel_config_t cfg={
+        .gpio_bus={2, 15, 4, 16, 27, 17, -1, -1, 5, 18, 19, 21, 26, 25, -1, -1},
+        .gpio_clk=22,
+        .bits=I2S_PARALLEL_BITS_16,
+        .clkspeed_hz=80*1000*1000, //was 100
+        .bufa=bufdesc[0],
+        .bufb=bufdesc[1],
+    };
+
+    uint16_t *bitplane[2][BITPLANE_CNT];
+    
+    for (int i=0; i<BITPLANE_CNT; i++) {
+        for (int j=0; j<2; j++) {
+            bitplane[j][i]=heap_caps_malloc(BITPLANE_SZ*2, MALLOC_CAP_DMA);
+            assert(bitplane[j][i] && "Can't allocate bitplane memory");
+        }
+    }
+    const uint8_t *fb = malloc(64*32*3 +50 ); // with extra
+    set_frame_buffer(fb);
+    memset(fb, 0, 64*32*3);
+    //Do binary time division setup. Essentially, we need n of plane 0, 2n of plane 1, 4n of plane 2 etc, but that
+    //needs to be divided evenly over time to stop flicker from happening. This little bit of code tries to do that
+    //more-or-less elegantly.
+    int times[BITPLANE_CNT]={0};
+    printf("Bitplane order: ");
+    for (int i=0; i<((1<<BITPLANE_CNT)-1); i++) {
+        int ch=0;
+        //Find plane that needs insertion the most
+        for (int j=0; j<BITPLANE_CNT; j++) {
+            if (times[j]<=times[ch]) ch=j;
+        }
+        printf("%d ", ch);
+        //Insert the plane
+        for (int j=0; j<2; j++) {
+            bufdesc[j][i].memory=bitplane[j][ch];
+            bufdesc[j][i].size=BITPLANE_SZ*2;
+        }
+        //Magic to make sure we choose this bitplane an appropriate time later next time
+        times[ch]+=(1<<(BITPLANE_CNT-ch));
+    }
+    printf("\n");
+
+    //End markers
+    bufdesc[0][((1<<BITPLANE_CNT)-1)].memory=NULL;
+    bufdesc[1][((1<<BITPLANE_CNT)-1)].memory=NULL;
+
+    //Setup I2S
+    i2s_parallel_setup(&I2S1, &cfg);
+
+    printf("I2S setup done.\n");
+
+    //We use GPIO0 (which usually has a button on it) to switch between animation and still.
+    gpio_set_direction(0, GPIO_MODE_DEF_INPUT);
+    gpio_pullup_en(0);
+    
+    int apos=0; //which frame in the animation we're on
+    int backbuf_id=0; //which buffer is the backbuffer, as in, which one is not active so we can write to it
+
+    wifi_init_sta();
+
+
+
+
+        while(1) {
+                       //Warning when set too high: Do not look into LEDs with remaining eye.    
+        //Fill bitplanes with the data for the current image
+             //pixel data for this animation frame
+         xSemaphoreTake( xFrameSync, portMAX_DELAY ) ;
+         for (int pl=0; pl<BITPLANE_CNT; pl++) {  // 0 to 6
+            int mask=(1<<(8-BITPLANE_CNT+pl)); //bitmask for pixel data in input for this bitplane 8-7 = 1 + pl
+            uint16_t *p=bitplane[backbuf_id][pl]; //bitplane location to write to
+            for (unsigned int y=0; y<16; y++) {
+                int lbits=0;                //Precalculate line bits of the *previous* line, which is the one we're displaying now
+                if ((y-1)&1) lbits|=BIT_A;
+                if ((y-1)&2) lbits|=BIT_B;
+                if ((y-1)&4) lbits|=BIT_C;
+                if ((y-1)&8) lbits|=BIT_D;
+                for (int fx=0; fx<64; fx++) {
+#if DISPLAY_ROWS_SWAPPED
+                    int x=fx^1; //to correct for the fact that the stupid LED screen I have has each row swapped...
+#else
+                    int x=fx;
+#endif
+
+                    int v=lbits;
+                    //Do not show image while the line bits are changing
+                    if (fx<1 || fx>=brightness) v|=BIT_OE;
+                    if (fx==63) v|=BIT_LAT; // was 62 latch on second-to-last bit... why not last bit? Dunno, probably a timing thing.
+
+                    int c1, c2;
+                    c1=getpixel(fb, x, y);
+                    c2=getpixel(fb, x, y+16);
+                    if (c1 & (mask<<16)) v|=BIT_R1;
+                    if (c1 & (mask<<8)) v|=BIT_G1;
+                    if (c1 & (mask<<0)) v|=BIT_B1;
+                    if (c2 & (mask<<16)) v|=BIT_R2;
+                    if (c2 & (mask<<8)) v|=BIT_G2;
+                    if (c2 & (mask<<0)) v|=BIT_B2;
+
+                    //Save the calculated value to the bitplane memory
+                    *p++=v;
+                }
+            }
+        }
+
+        //Show our work!
+        i2s_parallel_flip_to_buffer(&I2S1, backbuf_id);
+        backbuf_id^=1;
+        //Bitplanes are updated, new image shows now.
+       // vTaskDelay(50 / portTICK_PERIOD_MS); //animation has an 100ms interval
+
+        if (gpio_get_level(0)) {
+            //show next frame of Nyancat animation
+            apos++;
+            if (apos>=12) apos=0;
+        } else {
+            //show Lena
+            apos=12;
+        }
+    }
+
+}
+
+
+void app_main()
+{
+
+    setup_frame_sync();
+    xTaskCreate(&frame_update, "frame_update", 8192, NULL, 10, NULL);
+    vTaskDelay(50 / portTICK_PERIOD_MS); 
+    xTaskCreate(&udp_conn, "udp_conn", 8192, NULL, 1, NULL);
+
+
+}
 

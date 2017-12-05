@@ -31,6 +31,7 @@
 #include "anim.h"
 #include "val2pwm.h"
 #include "i2s_parallel.h"
+#include "driver/gpio.h"
 
 typedef struct {
     volatile lldesc_t *dmadesc_a, *dmadesc_b;
@@ -141,13 +142,13 @@ void i2s_parallel_setup(i2s_dev_t *dev, const i2s_parallel_config_t *cfg) {
     dev->sample_rate_conf.val=0;
     dev->sample_rate_conf.rx_bits_mod=cfg->bits;
     dev->sample_rate_conf.tx_bits_mod=cfg->bits;
-    dev->sample_rate_conf.rx_bck_div_num=4; //ToDo: Unsure about what this does...
-    dev->sample_rate_conf.tx_bck_div_num=4;
+    dev->sample_rate_conf.rx_bck_div_num=4; //1 for 20Mhz
+    dev->sample_rate_conf.tx_bck_div_num=4;  //1 for 20mhz
     
     dev->clkm_conf.val=0;
     dev->clkm_conf.clka_en=0;
-    dev->clkm_conf.clkm_div_a=63;
-    dev->clkm_conf.clkm_div_b=63;
+    dev->clkm_conf.clkm_div_a=1; //63
+    dev->clkm_conf.clkm_div_b=1; //63
     //We ignore the possibility for fractional division here.
     dev->clkm_conf.clkm_div_num=80000000L/cfg->clkspeed_hz;
     
